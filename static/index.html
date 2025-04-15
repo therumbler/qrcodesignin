@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.3/cdn.min.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 1rem;
+        }
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    
+</head>
+<body>
+    <main id="app" x-data="MainApp()">
+        <header>
+            <h1 x-text="isAuthorized ? 'AUTHORIZED': 'Scan The Code'"></h1>
+        </header>
+        <div>
+            <h2 x-text="isAuthorized ? 'Authorized' : 'Not Authorized'"></h2>
+        </div>
+        <div>
+            <p x-text="imageUrl ? 'Scan this QR code:' : ''"></p>
+            <template x-if="imageUrl">
+                <img :src="imageUrl" alt="QR Code">
+            </template>
+        </div>
+        
+        <p>This is an example QR code login page. Use your phone to scan the QR code to simulate a login</p>
+    </main>
+    <footer>
+        <p>&copy; 2023 Generic Page</p>
+    </footer>
+    <script src="./js/app.js?v=0.0.1"></script>
+</body>
+</html>
