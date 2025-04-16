@@ -29,6 +29,10 @@
             bottom: 0;
             width: 100%;
         }
+        .qr-code-image {
+            width: 200px;
+            height: 200px;
+        }
     </style>
     
 </head>
@@ -43,7 +47,7 @@
         <div>
             <p x-text="imageUrl ? 'Scan this QR code:' : ''"></p>
             <template x-if="imageUrl">
-                <img :src="imageUrl" alt="QR Code">
+                <img class="qr-code-image" :src="imageUrl" alt="QR Code">
             </template>
         </div>
         
