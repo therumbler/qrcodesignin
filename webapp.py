@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.websockets import WebSocket
+from fastapi.websockets import WebSocket, WebSocketDisconnect
 
 
 from qrcodesignin.service import Service
@@ -46,7 +46,11 @@ def make_app():
         await websocket.accept()
         try:
             while True:
-                message = await websocket.receive_json()
+                try:
+                    message = await websocket.receive_json()
+                except WebSocketDisconnect:
+                    await service.websocket_disconnected(websocket)
+                    break
                 logger.info("got message: %r", message)
                 response = await service.process(message, ws_connection=websocket)
                 logger.info("response: %r", response)

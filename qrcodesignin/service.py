@@ -57,3 +57,12 @@ class Service:
         if self._connections.get(uuid):
             await self._connections[uuid].send_json({"auth": True})
         return self._database.get_uuid(uuid)
+
+    async def websocket_disconnected(self, ws_connection):
+        """handle websocket disconnection"""
+        logger.info("websocket disconnected")
+        for uuid, connection in self._connections.items():
+            if connection == ws_connection:
+                logger.info("removing connection for uuid: %s", uuid)
+                del self._connections[uuid]
+                break
