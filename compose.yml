@@ -1,0 +1,10 @@
+---
+services:
+  app:
+    build: .
+    ports:
+      - "5022:5022"
+    env_file:
+      - .env
+    volumes:
+      - ./static:/app/static
